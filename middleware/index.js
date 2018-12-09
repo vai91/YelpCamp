@@ -1,7 +1,7 @@
-// All the Middleware goes here
-var middlewareObj   = {};
 var Campground      = require("../models/campground");
 var Comment         = require("../models/comment");
+// All the Middleware goes here
+var middlewareObj   = {};
 
 middlewareObj.checkCampgroundOwnership = function(req, res, next){
         if(req.isAuthenticated()){
@@ -17,7 +17,7 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
                 if(foundCampground.author.id.equals(req.user._id)){
                     next();
                 } else {
-                    req.flash("error", "You don't have permission to do that");
+                    req.flash("error", "You don't have permission to do that, campground does not belong to you.");
                     res.redirect("back");
                 }
            }
@@ -42,7 +42,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 if(foundComment.author.id.equals(req.user._id)){
                     next();
                 } else {
-                    req.flash("error", "You don't have permission to do that");
+                    req.flash("error", "You don't have permission to do that, comment does not belong to you.");
                     res.redirect("back");
                 }
            }

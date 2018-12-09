@@ -49,7 +49,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 });
 
 // EDIT COMMENTS ROUTE
-router.get("/:comment_id/edit", middleware.checkCampgroundOwnership, function(req, res){
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
     Comment.findById(req.params.comment_id, function(err, foundComment) {
         if(err){
             res.redirect("back");
@@ -60,7 +60,7 @@ router.get("/:comment_id/edit", middleware.checkCampgroundOwnership, function(re
 });
 
 // UPDATE COMMENTS ROUTE
-router.put("/:comment_id", middleware.checkCampgroundOwnership, function(req, res){
+router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
     console.log(req.body.comment);
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
