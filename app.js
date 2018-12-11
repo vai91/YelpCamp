@@ -17,8 +17,8 @@ var commentRoutes       = require("./routes/comments"),
 
 //on local, DATABASEURL=mongodb://localhost:27017/yelp_camp_v13 
 //on heroku, DATABASEURL=mongodb://efe:648599Ef_@ds131753.mlab.com:31753/celpyamp
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
-// mongoose.connect("mongodb://efe:648599Ef_@ds131753.mlab.com:31753/celpyamp", { useNewUrlParser: true });
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v13";
+mongoose.connect(url, { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
@@ -56,6 +56,7 @@ app.use(function(req, res, next){
 app.use(indexRoutes);
 app.use("/campgrounds",campgroundRoutes);
 app.use("/campgrounds/:id/comments",commentRoutes);
+//env variable is a universal thing, not a node specific.
 //environment variables in node always start with process.env
 //they are coming from the actual server that we run our code on. 
 app.listen(process.env.PORT, process.env.IP, function(){

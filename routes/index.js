@@ -9,7 +9,7 @@ router.get("/", function(req, res){
 
 //show register form route
 router.get("/register", function(req, res) {
-   res.render("register"); 
+   res.render("register", {page: 'register'}); 
 });
 // handle user signup logic route
 router.post("/register", function(req, res) {
@@ -30,7 +30,7 @@ router.post("/register", function(req, res) {
 // show login form route
 router.get("/login", function(req, res) {
     //we have a message variable(errorMessage&successMessage) exposed with res.locals.message, and req.flash defined on the isLoggedIn middleware. so we don't pass any object here or define req.flash
-    res.render("login");
+    res.render("login", {page: 'login'});
 });
 // handling login logic
 router.post("/login", passport.authenticate("local", 

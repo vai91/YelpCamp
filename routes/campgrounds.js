@@ -12,8 +12,7 @@ router.get("/", function(req, res){
             console.log("ERROR OCCURED");
             console.log(err);
         }else{
-            res.render("campgrounds/index", {campgrounds:allCampgrounds});
-
+            res.render("campgrounds/index", {campgrounds:allCampgrounds, page: 'campgrounds'});
         }
     });
     
