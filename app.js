@@ -8,15 +8,15 @@ var express         = require("express"),
     methodOverride  = require("method-override"),
     Campground      = require("./models/campground"),
     Comment         = require("./models/comment"),
-    User            = require("./models/user"),
-    seedDB          = require("./seeds");
+    User            = require("./models/user");
+
 //requiring routes    
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index");
 
 //on local, DATABASEURL=mongodb://localhost:27017/yelp_camp_v13 
-//on heroku, DATABASEURL=mongodb://efe:648599Ef_@ds131753.mlab.com:31753/celpyamp
+//on heroku, DATABASEURL=mongodb://<user>:<password>@ds131753.mlab.com:31753/celpyamp
 var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v13";
 mongoose.connect(url, { useNewUrlParser: true });
 
@@ -26,7 +26,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-//seedDB();    // seed the db
+
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
